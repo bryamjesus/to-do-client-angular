@@ -1,5 +1,19 @@
 <div class="container py-5">
-  <div class="row">
+  <div class="rounded shadow p-5 d-flex">
+    <img src="/assets/tasks.svg" alt="" width="250">
+    <div>
+      <h3 class="text-primary">Bienvenido a Tareas</h3>
+      <h5 class="text-secondary">Con esta aplicacion podrás consultar, crear, actualizar y eliminar tus tareas</h5>
+      <hr>
+      <p class="text-muted">
+        Esta aplicacion fue desarrollada con Spring Boot, Angular y MongoDB
+
+      </p>
+
+    </div>
+  </div>
+
+  <div class="row mt-5">
     <div class="col-md-6">
       <h3>Mi lista de tareas</h3>
       <div class="my-5"></div>
@@ -11,10 +25,15 @@
               {{ tarea.nombre }}
             </div>
             <div class="text-muted">
-              <i class="fa fa-edit cursor-pointer" title="Editar tarea"></i>
+              <i
+                class="fa fa-edit cursor-pointer"
+                title="Editar tarea"
+                (click)="edit(tarea)"
+              ></i>
               <i
                 class="fa fa-trash ms-2 cursor-pointer"
                 title="Eliminar tarea"
+                (click)="delete(tarea)"
               ></i>
             </div>
           </div>
@@ -36,6 +55,35 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6"></div>
+    <div class="col-md-6">
+      <h3>{{ tarea.id ? "Editar" : "Nueva" }} Tarea</h3>
+      <form class="mt-5" (ngSubmit)="save()">
+        <div class="mb-3 form-floating">
+          <input
+            type="text"
+            id="nombre"
+            placeholder="Nombre"
+            name="nombre"
+            class="form-control"
+            [(ngModel)]="tarea.nombre"
+          />
+          <label for="nombre">Nombre</label>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input
+            type="checkbox"
+            id="completado"
+            class="form-check-input"
+            name="completado"
+            [(ngModel)]="tarea.completado"
+          />
+          <label for="completado" class="form-check-label">Completado</label>
+        </div>
+        <div class="text-end">
+          <button class="btn btn-primary btn-lg">Guardar</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
